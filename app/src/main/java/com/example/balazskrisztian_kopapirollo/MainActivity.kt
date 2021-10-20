@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     var ember = 0
     var dontetlen = 0
     var pontok = 0
+    var vereseg = 0
+    var gyozelem = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,39 +68,45 @@ class MainActivity : AppCompatActivity() {
 
         if (gep_szam == 0) {
             icon_gep.setImageResource(R.drawable.rock)
-        }
-        else if (gep_szam == 1) {
+        } else if (gep_szam == 1) {
             icon_gep.setImageResource(R.drawable.paper)
-        }
-        else if (gep_szam == 2) {
+        } else if (gep_szam == 2) {
             icon_gep.setImageResource(R.drawable.scissors)
         }
 
         if (ember == gep_szam) {
-            dontetlen()
+            dontetlen_kekw()
+        } else if (ember == 2 && gep_szam == 0) {
+            vereseg_kekw()
+        } else if (ember == 0 && gep_szam == 2) {
+            gyozelem_kekw()
+        } else if (ember > gep_szam) {
+            gyozelem_kekw()
+        } else {
+            vereseg_kekw()
         }
-        else if (ember == 2 && gep_szam == 0) {
-            vereseg()
-        }
-        else if (ember == 0 && gep_szam == 2) {
-            gyozelem()
-        }
-        else if (ember > gep_szam) {
-            gyozelem()
-        }
-        else {
-            vereseg()
-        }
+    }
 
-        fun dontetlen() {
+        fun dontetlen_kekw() {
             dontetlen++
         }
 
-        fun vereseg() {
+        fun vereseg_kekw() {
+            vereseg++
+            ujgep()
         }
 
-        fun gyozelem() {
+        fun gyozelem_kekw() {
+            gyozelem++
+            ujember()
         }
-    }
+
+        fun ujgep() {
+            win_gep.setText(vereseg.toString())
+        }
+
+        fun ujember() {
+            win_ember.setText(gyozelem.toString())
+        }
 }
 
