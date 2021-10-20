@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,11 +16,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var btn_ko : Button
     lateinit var btn_papir : Button
     lateinit var btn_ollo : Button
+    lateinit var random : Random
 
+    var gep_szam = 0
     var ember = 0
-    var win = 0
-    var lose = 0
-    var draw = 0
+    var dontetlen = 0
+    var pontok = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         init();
     }
 
-    fun init(){
+    fun init() {
         icon_ember = findViewById(R.id.icon_ember)
         icon_gep = findViewById(R.id.icon_gep)
         win_ember = findViewById(R.id.win_ember)
@@ -42,15 +44,61 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun btn_olloOn() {
-        TODO("Not yet implemented")
+        icon_ember.setImageResource(R.drawable.scissors)
+        ember = 1
+        gep()
     }
 
     private fun btn_papirOn() {
-        TODO("Not yet implemented")
+        icon_ember.setImageResource(R.drawable.paper)
+        ember = 1
+        gep()
     }
 
     private fun btn_koOn() {
-        TODO("Not yet implemented")
+        icon_ember.setImageResource(R.drawable.rock)
+        ember = 0
+        gep()
     }
 
+    fun gep() {
+        val gep_szam = random.nextInt(3)
+
+        if (gep_szam == 0) {
+            icon_gep.setImageResource(R.drawable.rock)
+        }
+        else if (gep_szam == 1) {
+            icon_gep.setImageResource(R.drawable.paper)
+        }
+        else if (gep_szam == 2) {
+            icon_gep.setImageResource(R.drawable.scissors)
+        }
+
+        if (ember == gep_szam) {
+            dontetlen()
+        }
+        else if (ember == 2 && gep_szam == 0) {
+            vereseg()
+        }
+        else if (ember == 0 && gep_szam == 2) {
+            gyozelem()
+        }
+        else if (ember > gep_szam) {
+            gyozelem()
+        }
+        else {
+            vereseg()
+        }
+
+        fun dontetlen() {
+            dontetlen++
+        }
+
+        fun vereseg() {
+        }
+
+        fun gyozelem() {
+        }
+    }
 }
+
