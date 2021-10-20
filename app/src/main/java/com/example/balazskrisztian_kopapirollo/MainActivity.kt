@@ -1,10 +1,12 @@
 package com.example.balazskrisztian_kopapirollo
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -16,12 +18,10 @@ class MainActivity : AppCompatActivity() {
     lateinit var btn_ko : Button
     lateinit var btn_papir : Button
     lateinit var btn_ollo : Button
-    lateinit var random : Random
 
-    var gep_szam = 0
+    var random = Random
     var ember = 0
     var dontetlen = 0
-    var pontok = 0
     var vereseg = 0
     var gyozelem = 0
 
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun btn_olloOn() {
         icon_ember.setImageResource(R.drawable.scissors)
-        ember = 1
+        ember = 2
         gep()
     }
 
@@ -103,10 +103,42 @@ class MainActivity : AppCompatActivity() {
 
         fun ujgep() {
             win_gep.setText(vereseg.toString())
+            nezzedhigywinee()
         }
 
         fun ujember() {
             win_ember.setText(gyozelem.toString())
+            nezzedhigywinee()
         }
+
+    fun ujelet() {
+        ember = 0
+        dontetlen = 0
+        vereseg = 0
+        gyozelem = 0
+
+        icon_gep.setImageResource(R.drawable.rock)
+        icon_ember.setImageResource(R.drawable.rock)
+    }
+
+
+    fun nezzedhigywinee() {
+        if (gyozelem == 3) {
+            var alertacio = AlertDialog.Builder(this).setTitle("Win volt")
+                .setCancelable(false)
+                .setMessage("Mehet tovább a csapatós?")
+                .setPositiveButton("Naná haverda", DialogInterface.OnClickListener { dialogInterface, i -> ujelet() })
+                .setNegativeButton("Hagyjál már tesa", DialogInterface.OnClickListener { dialogInterface, i -> finish() })
+                .show()
+        }
+        else if (vereseg == 3) {
+            var alertacio = AlertDialog.Builder(this).setTitle("Nem win volt")
+                .setCancelable(false)
+                .setMessage("Mehet tovább a csapatós?")
+                .setPositiveButton("Naná haverda", DialogInterface.OnClickListener { dialogInterface, i -> ujelet() })
+                .setNegativeButton("Hagyjál már tesa", DialogInterface.OnClickListener { dialogInterface, i -> finish() })
+                .show()
+        }
+    }
 }
 
