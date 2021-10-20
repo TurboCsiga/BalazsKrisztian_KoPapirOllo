@@ -103,12 +103,12 @@ class MainActivity : AppCompatActivity() {
 
         fun ujgep() {
             win_gep.setText(vereseg.toString())
-            nezzedhigywinee()
+            nezzedhogywinee()
         }
 
         fun ujember() {
             win_ember.setText(gyozelem.toString())
-            nezzedhigywinee()
+            nezzedhogywinee()
         }
 
     fun ujelet() {
@@ -119,10 +119,13 @@ class MainActivity : AppCompatActivity() {
 
         icon_gep.setImageResource(R.drawable.rock)
         icon_ember.setImageResource(R.drawable.rock)
+
+        win_ember.setText("0")
+        win_gep.setText("0")
     }
 
 
-    fun nezzedhigywinee() {
+    fun nezzedhogywinee() {
         if (gyozelem == 3) {
             var alertacio = AlertDialog.Builder(this).setTitle("Win volt")
                 .setCancelable(false)
